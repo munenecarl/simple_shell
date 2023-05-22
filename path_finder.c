@@ -41,6 +41,7 @@ char *path_finder(char *cmd)
 		if (path_to_cmd == NULL)
 		{
 			perror("Error");
+			free(path);
 			return (NULL);
 		}
 		snprintf(path_to_cmd, len, "%s/%s", dir, cmd);
