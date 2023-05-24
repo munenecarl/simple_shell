@@ -1,6 +1,17 @@
 #include "main.h"
 
 /**
+ * print_prompt - prints the prompt
+ * Return: void
+ */
+
+void print_prompt(void)
+{
+	if (isatty(STDIN_FILENO))
+		write(STDOUT_FILENO, "$ ", 2);
+}
+
+/**
  * token_creator - creates tokens from a string
  * @str: string to tokenize
  * Return: pointer to array of tokens
@@ -71,7 +82,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 
 	while (1)
 	{
-		printf("$ ");
+		print_prompt();
 		read = getline(&line, &len, stdin);
 		if (read == -1)
 		{
@@ -83,7 +94,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 		{
 			continue;
 		}
-		executor(tokens);
+		executor(tokens, av);
 		free_tokens(tokens);
 		free(line);
 		line = NULL;

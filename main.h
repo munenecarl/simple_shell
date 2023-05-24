@@ -18,7 +18,7 @@ extern char **environ;
 typedef long int ssize_t;
 
 
-int executor(char **tokens);
+int executor(char **tokens, char **av);
 char *path_finder(char *cmd);
 ssize_t _getline(char **pline_buf, size_t *pn, FILE *fin);
 void free_tokens(char **tokens);

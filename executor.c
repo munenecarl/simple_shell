@@ -21,7 +21,7 @@ int env_finder(void)
  * @tokens: array of tokens
  * Return: 0
  */
-int executor(char **tokens)
+int executor(char **tokens, char **av)
 {
 	char *cmd, *path_to_cmd;
 	__pid_t pid;
@@ -54,7 +54,7 @@ int executor(char **tokens)
 		{
 			if (execve(path_to_cmd, tokens, NULL) == -1)
 			{
-				perror("Error");
+				fprintf(stderr, "%s: 1: %s: not found\n", av[0], cmd);
 				exit(0);
 			}
 		}
@@ -64,7 +64,13 @@ int executor(char **tokens)
 			exit(0);
 		}
 		else
+		{
 			wait(&status);
+			if (WIFEXITED(status) && WEXITSTATUS(status) == 127)
+			{
+				fprintf(stderr, "%s: 1: %s: not found\n", av[0], cmd);
+			}
+		}
 		free(path_to_cmd);
 	}
 	return (0);
