@@ -11,14 +11,14 @@ char *path_finder(char *cmd)
 	char *path, *path_env, *path_to_cmd, *dir;
 	size_t len = 0;
 
-	if (strchr(cmd, '/') != NULL) 
-	{ 
-		if (access(cmd, X_OK) == 0) 
-			return strdup(cmd);
+	if (strchr(cmd, '/') != NULL)
+	{
+		if (access(cmd, X_OK) == 0)
+			return (strdup(cmd));
 		else
 		{
 			perror("Error");
-			return NULL;
+			return (NULL);
 		}
 	}
 	path_env = getenv("PATH");

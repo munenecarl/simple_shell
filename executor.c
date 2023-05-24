@@ -7,6 +7,7 @@
 int env_finder(void)
 {
 	char **env = environ;
+
 	while (*env != NULL)
 	{
 		printf("%s\n", *env);
